@@ -5,36 +5,36 @@
 }
 
 body {
-    background-image: url(./flat-lay-desk-arrangement-with-copy-space_23-2148928165.webp);
     display: flex;
     justify-content: center;
+    background-color: rgb(86, 171, 255);
 }
 
 
 .container {
     display: flex;
     flex-direction: column;
-    margin-top: 10%;
+    margin-top: 5%;
+    border: solid rgb(159, 250, 255) 12px;
+    border-radius: 4px;
+    box-shadow: -4px 12px 0px 4px rgb(63, 63, 63);
 }
 
 .screen {
+    word-break: break-word;
     width: 280px;
-    height: 120px;
-    border: solid black 4px;
-    border-top: solid black 10px;
-    background-color: rgb(216, 237, 255);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    height: 190px;
+    background-color: rgb(210, 236, 255);
+    box-shadow: 0px 10px 0px 10px inset rgb(49, 49, 49);
+    margin: 0px;
+    padding-top: 24px;
+    padding-left: 20px;
 }
 
 .buttonContainer {
-    border: solid black 4px;
     width: 280px;
-    height: 380px;
-    box-shadow: 0px 6px black;
-    background-color: rgb(184, 184, 184);
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    height: 360px;
+    background-color: rgb(159, 250, 255);
 }
 
 .firstRow,
@@ -50,13 +50,15 @@ body {
 button {
     width:60px;
     height: 60px;
-    border: solid black 3px;
-    box-shadow: 0px 6px black;
+    border: solid rgb(0, 0, 0) 3px;
+    box-shadow: 0px 6px rgb(0, 0, 0);
     border-radius: 16px;
 }
 
 button:hover {
     background-color: rgb(220, 220, 220);
+    transform: translateY(1px);
+    box-shadow: 0px 5px black;
 }
 
 button:active {
