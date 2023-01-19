@@ -8,6 +8,9 @@ const multiply = document.querySelector('#multiply')
 const divide = document.querySelector('#divide')
 const screen = document.querySelector('.screen')
 const equals = document.querySelector('.equals')
+const ac = document.querySelector('.ac')
+const c = document.querySelector('.c')
+const decimal = document.querySelector('#decimal')
 
 //displays numbers on screen
 function display () {
@@ -24,6 +27,10 @@ function display () {
             screen.textContent = output
         })
     })
+    decimal.addEventListener('click', () =>{
+        output = output.concat('.')
+        screen.textContent = output
+    })
 }
 display()
 
@@ -36,16 +43,23 @@ buttons.forEach(button => {
     })
 })
 
-function operate (array) {
+const findOperator = function (array) {
+
     for (let i = 0; i < array.length; i++) {
         if (array[i] == '/' || array[i] == 'X' || array[i] == '-' || array[i] == '+'){
             operator = array[i]
             index = i
         }
     }
+    return index
+}
 
-    let num1 = +(array.slice(0, index).join(''))
-    let num2 = +(array.slice(index + 1).join(''))
+function operate (equation) {
+    let array = equation.split('')
+    operator = array[findOperator]
+
+    let num1 = +(array.slice(0, findOperator(array)).join(''))
+    let num2 = +(array.slice(findOperator(array) + 1).join(''))
 
     switch (operator) {
         case "+":
@@ -60,7 +74,17 @@ function operate (array) {
 }
 
 equals.addEventListener('click', () => {
-    let equation = output.split('')
-    screen.textContent = operate(equation)
+    screen.textContent = operate(output)
     output = ''
+})
+
+ac.addEventListener('click', () => { 
+    output = '' 
+    screen.textContent = output
+})
+
+c.addEventListener('click', () => {
+    let array = output.split('')
+    output = array.splice(0, findOperator(array) + 1).join('');
+    screen.textContent = output
 })
