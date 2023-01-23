@@ -15,7 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-top: 5%;
-    border: solid rgb(159, 250, 255) 12px;
+    border: solid rgb(235, 176, 255) 12px;
     border-radius: 4px;
     box-shadow: -4px 12px 0px 4px rgb(63, 63, 63);
 }
@@ -24,7 +24,7 @@ body {
     word-break: break-word;
     width: 280px;
     height: 190px;
-    background-color: rgb(210, 236, 255);
+    background-color: rgb(255, 255, 255);
     box-shadow: 0px 10px 0px 10px inset rgb(49, 49, 49);
     margin: 0px;
     padding-top: 24px;
@@ -34,7 +34,7 @@ body {
 .buttonContainer {
     width: 280px;
     height: 360px;
-    background-color: rgb(159, 250, 255);
+    background-color: rgb(235, 176, 255);
 }
 
 .firstRow,
@@ -50,24 +50,51 @@ body {
 button {
     width:60px;
     height: 60px;
-    border: solid rgb(0, 0, 0) 3px;
+    border: solid rgb(0, 0, 0) 2px;
     box-shadow: 0px 6px rgb(0, 0, 0);
     border-radius: 16px;
-}
+} 
 
 button:hover {
-    background-color: rgb(220, 220, 220);
     transform: translateY(1px);
     box-shadow: 0px 5px black;
+}
+
+#decimal:hover,
+.number:hover {
+    background-color: rgb(220, 220, 220);
+   
+}
+
+.operator {
+    background-color:  rgb(252, 255, 173); 
+}
+
+.operator:hover {
+    background-color: rgb(255, 245, 129);
+}
+
+.equals,
+.negative,
+.ac,
+.c {
+    background-color: rgb(133, 214, 255);
+}
+
+.equals:hover, 
+.negative:hover,
+.ac:hover,
+.c:hover  {
+    background-color: rgb(170, 244, 255);
+} 
+
+.equals {
+    width: 45%;
 }
 
 button:active {
     transform: translateY(5px);
     box-shadow: 0px 0px;
-}
-
-.equals {
-    width: 45%;
 }
 
 

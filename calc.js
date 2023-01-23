@@ -11,6 +11,7 @@ const equals = document.querySelector('.equals')
 const ac = document.querySelector('.ac')
 const c = document.querySelector('.c')
 const decimal = document.querySelector('#decimal')
+const sign = document.querySelector('.negative')
 
 //displays numbers on screen
 function display () {
@@ -23,13 +24,19 @@ function display () {
     })
     operators.forEach (operate => {
         operate.addEventListener('click', () =>{
-            output = output.concat(operate.getAttribute('id'))
-            screen.textContent = output
+            if (output[output.length-1] == '/' || output[output.length-1] == 'X' || output[output.length-1] == '-' || output[output.length-1] == '+') { return;
+            } else {
+                output = output.concat(operate.getAttribute('id'))
+                screen.textContent = output
+            }
         })
     })
     decimal.addEventListener('click', () =>{
-        output = output.concat('.')
-        screen.textContent = output
+        if (output[output.length-1] == '.'){ return;
+        } else {
+            output = output.concat('.')
+            screen.textContent = output
+        }
     })
 }
 display()
@@ -44,23 +51,19 @@ buttons.forEach(button => {
 })
 
 const findOperator = function (array) {
-
     for (let i = 0; i < array.length; i++) {
         if (array[i] == '/' || array[i] == 'X' || array[i] == '-' || array[i] == '+'){
-            operator = array[i]
-            index = i
+            indx = i
+            break;
+        } else {
+            indx = null
         }
     }
-    return index
+    return indx
 }
 
-function operate (equation) {
-    let array = equation.split('')
-    operator = array[findOperator]
-
-    let num1 = +(array.slice(0, findOperator(array)).join(''))
-    let num2 = +(array.slice(findOperator(array) + 1).join(''))
-
+function operate (num1, num2, operator) {
+    
     switch (operator) {
         case "+":
             return num1 + num2
@@ -73,8 +76,41 @@ function operate (equation) {
     }
 }
 
+function calculate(array) {
+    let opCount = 0
+    console.log(array)
+
+    for (let item of array) {
+        if (item == '/' || item == 'X' || item == '-' || item == '+') {
+            ++opCount
+        }
+    }
+
+    for (let i = 0; i < opCount; i++) {
+        num1 = array.slice(0, findOperator(array)).join('')
+        array.splice(0, findOperator(array))
+
+        operator = array[0]
+        array.splice(0, 1)
+        console.log(array)
+
+        if (!findOperator(array)) {
+            num2 = array.join('')
+        } else {
+            num2 = array.slice(0, findOperator(array)).join('')
+            array.splice(0, findOperator(array))
+        }
+
+        console.log('1='+num1,'2='+ num2, operator)
+        array.unshift(operate(+num1, +num2, operator))
+        console.log(array)
+    }
+    return array[0]
+}
+
 equals.addEventListener('click', () => {
-    screen.textContent = operate(output)
+    let array = output.split('')
+    screen.textContent = calculate(array)
     output = ''
 })
 
@@ -85,6 +121,10 @@ ac.addEventListener('click', () => {
 
 c.addEventListener('click', () => {
     let array = output.split('')
-    output = array.splice(0, findOperator(array) + 1).join('');
+    if (output[output.length-1] == '/' || output[output.length-1] == 'X' || output[output.length-1] == '-' || output[output.length-1] == '+') {
+         output = array.splice(0, findOperator(array)).join('')
+    } else {
+        output = array.splice(0, findOperator(array) + 1).join('');
+    }
     screen.textContent = output
 })
