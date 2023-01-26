@@ -23,12 +23,27 @@ body {
 .screen {
     word-break: break-word;
     width: 280px;
-    height: 190px;
+    height: 95px;
     background-color: rgb(255, 255, 255);
-    box-shadow: 0px 10px 0px 10px inset rgb(49, 49, 49);
+    box-shadow: 0px 10px 0px 10px inset rgb(65, 65, 65);
     margin: 0px;
     padding-top: 24px;
     padding-left: 20px;
+    padding-right:10px
+}
+
+.screen2 {
+    display: flex;
+    justify-content: flex-end;
+    word-break: break-word;
+    width: 280px;
+    height: 95px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0px 0px 0px inset #ffffff, 0 0px 0px 0px inset #0a0a0a, 14px 0 0px -4px inset rgba(65, 65, 65, 0.99), -14px 0 0px -4px inset rgba(65, 65, 65, 0.97);
+    margin: 0px;
+    padding-top: 55px;
+    padding-right: 15px;
+
 }
 
 .buttonContainer {
