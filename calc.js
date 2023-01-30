@@ -48,11 +48,11 @@ function sound() {
         audio.currentTime = 0;
         audio.play();
 }
-
 buttons.forEach(button => {
     button.addEventListener('click', sound)
 })
 
+// finds the index of first operator to get num1, num2, and operator
 const findOperator = function (array) {
     for (let i = 0; i < array.length; i++) {
         if (array[i] == '/' || array[i] == 'x' || array[i] == '−' || array[i] == '+'){
@@ -79,46 +79,55 @@ function operate (num1, num2, operator) {
     }
 }
 
+//
 function calculate(string) {
     let opCount = 0
     let array = string.split('')
 
+    //finds how many operators(n). Loop through n many times
     for (let item of array) {
         if (item == '/' || item == 'x' || item == '−' || item == '+') {
             ++opCount
         }
     }
 
+    
     for (let i = 0; i < opCount; i++) {
+        //sets num1 as the first indexes before the operator and takes those indexes out
         num1 = array.slice(0, findOperator(array)).join('')
         array.splice(0, findOperator(array))
 
+        //since indexes of num1 are spliced, the first index is the operator
         operator = array[0]
         array.splice(0, 1)
 
+        // sets num2 as first indexes after num1 and operator taken out
         if (!findOperator(array)) {
+            //if it is the last number
             num2 = array.join('')
         } else {
+            //if num2 not last number in equation-->loop again so need to splice num2 out
             num2 = array.slice(0, findOperator(array)).join('')
             array.splice(0, findOperator(array))
         }
 
+        //answer of the firs num1 num2 will be put into array[0] until there is only 1 item in array
         array.unshift(operate(+num1, +num2, operator))
     }
+    //rounds to 5th decimal if necesarry
     return (Math.round(array[0] * 100000) / 100000)
 }
 
+//event listeners for =, AC, C, and +/-
 equals.addEventListener('click', () => {
     screen2.textContent = calculate(output)
     output = ''
 })
-
 ac.addEventListener('click', () => { 
     output = '' 
     screen.textContent = output
     screen2.textContent = output
 })
-
 c.addEventListener('click', () => {
 
     screen2.textContent = ''
@@ -131,7 +140,6 @@ c.addEventListener('click', () => {
     }
     screen.textContent = output
 })
-
 sign.addEventListener ('click', () => {
     if (output[output.length - 1] == '-') {
         output.splice(1, output[output.length])
@@ -142,6 +150,7 @@ sign.addEventListener ('click', () => {
     }
 })
 
+// keyboard functionality for numbers, operators, enter, and backspace
 window.addEventListener('keydown', (e) => {
     if (e.key < 10) {
         sound()
